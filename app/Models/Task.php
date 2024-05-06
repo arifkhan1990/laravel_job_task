@@ -10,11 +10,12 @@ class Task extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title',
+        'title', 'description', 'category', 'due_date'
     ];
 
     protected $casts = [
-        'is_done' => 'boolean'
+        'is_done' => 'boolean',
+        'due_date' => 'date'
     ];
 
     protected $hidden = [
