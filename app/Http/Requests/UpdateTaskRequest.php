@@ -23,7 +23,7 @@ class UpdateTaskRequest extends FormRequest
     {
         return [
             'title' => 'sometimes|required|max:255',
-            'due_date' => 'sometimes|required|date_format:Y-m-d',
+            'due_date' => 'sometimes|required|date_format:Y-m-d|after:10 hours',
             'category' => 'sometimes',
             'is_done' => 'sometimes|boolean',
             'description' => 'sometimes'
