@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\ErrorResource;
+use App\Http\Resources\SuccessResource;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -26,7 +27,12 @@ class UserController extends Controller
         } else {
             $userData = User::where('id', $id)->first();
             $userData->update($validated);
-            return new UserResource($userData);
+            return (new SuccessResource([
+                'status' => 'Success',
+                'message' => 'Successfully logged out',
+                'code' => 200,
+                'data' => new UserResource($userData)
+            ]))->response()->setStatusCode(200);
         }
     }
 }

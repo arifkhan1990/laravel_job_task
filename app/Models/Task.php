@@ -13,7 +13,7 @@ class Task extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'description', 'category', 'due_date', 'created_by'
+        'title', 'description', 'category', 'due_date', 'created_by', 'is_done'
     ];
 
     protected $casts = [

@@ -64,9 +64,6 @@ class AuthController extends Controller
         $validated = $request->validated();
         $validated['password'] = Hash::make($validated['password']);
         $user = User::create($validated);
-        // if ($validated->fails()) {
-        //     return (new ErrorResource($user->getMessageBag()))->resource()->setStatusCode(422);
-        // }
         $token = Auth::login($user);
         return (new SuccessResource([
             'status' => 'Success',

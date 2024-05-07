@@ -50,13 +50,12 @@ Route::middleware(['auth:api', 'throttle:10,1'])->group(function () {
 });
 
 
-
 // Test the mail sending
 Route::get('/send-test-email', function () {
     $task = Task::where('created_by', Auth::id())->first();
     // Check if a Task exists
     if ($task) {
-        Mail::to('arif.entertech19@gmail.com')->send(new TaskReminderMail($task));
+        Mail::to('send_mail.example@gmail.com')->send(new TaskReminderMail($task));
         return response()->json(['message' => 'Test email sent successfully']);
     } else {
         return response()->json(['message' => 'No Task found.'], 404);
