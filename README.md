@@ -1,66 +1,140 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Task Management API with JWT Authentication
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Project Overview
 
-## About Laravel
+Task Management API with JWT Authentication is a RESTful API developed using the Laravel PHP framework. It allows users to perform CRUD operations on tasks with JWT (JSON Web Token) authentication. Users can register, login, create, read, update, and delete tasks. Each task belongs to a specific user, ensuring data privacy and security.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+#### User Authentication
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+    # JWT authentication for user registration, login, and authentication.
+    # Endpoints for user registration, user login, and token refresh.
 
-## Learning Laravel
+#### Task Management
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+    # CRUD operations for tasks (Create, Read, Update, Delete).
+    # Task fields include title, description, due date, and status.
+    # Users can only access, modify, and delete their own tasks.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+#### Authorization
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+    # Authenticated users can access task-related endpoints.
+    # Authorization checks prevent unauthorized access to other users' tasks.
 
-## Laravel Sponsors
+#### Validation
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+    # Input data validation for creating and updating tasks.
+    # Error messages for validation failures.
 
-### Premium Partners
+#### Pagination and Filtering
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+    # Pagination for task listing endpoints.
+    # Filtering options (e.g., by status, due date) for task listing.
 
-## Contributing
+#### Testing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    # Automated tests using PHPUnit or Laravel Dusk.
+    # Positive and negative scenarios, edge cases, and error handling.
 
-## Code of Conduct
+#### Bonus Features
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+    # User Profile: Users can view and update their profile information.
+    # Task Categories: Implement task categories or tags for task categorization.
+    # Task Reminders: Set reminders for tasks and send email or SMS notifications.
+    # Rate Limiting: Implement rate limiting to prevent excessive API usage.
 
-## Security Vulnerabilities
+### Tech Stack
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+    # Framework: Laravel (latest version)
+    # Database: MySQL or SQLite
+    # Authentication: JWT (JSON Web Token)
+    # Testing: PHPUnit or Laravel Dusk
 
-## License
+## Installation and Setup
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+##### Clone the repository
+
+``` bash
+    git clone https://github.com/arifkhan1990/laravel_job_task.git
+```
+
+##### Navigate to the project directory
+
+``` bash
+    cd laravel_job_task
+```
+
+##### Install composer dependencies
+
+``` bash
+    composer install
+```
+
+##### Set up environment variables
+
+    .Copy the `.env.example` file to `.env` and configure database settings.
+    .Generate application key and jwt secret key:
+
+``` bash
+    php artisan key:generate
+    php artisan vendor:publish --provider="PHPOpenSourceSaver\JWTAuth\Providers\LaravelServiceProvider"
+    php artisan jwt:secret
+```
+
+##### Run database migrations
+
+``` bash
+    php artisan migrate
+```
+
+##### Start the development server
+
+``` bash
+    php artisan serve
+```
+
+##### Testing
+
+    Run automated tests using PHPUnit:
+
+``` bash
+    php artisan test
+    or
+    php artisan test --filter=TaskReminderTest
+    or
+    php artisan test --filter=TaskControllerTest
+    or
+    php artisan test --filter=ApiTest
+    or
+    php artisan test --filter=AuthTest
+```
+
+### API Documentation
+
+Document API endpoints, request/response formats, and authentication mechanisms using tools in Postman. API documentation Link [Click](https://documenter.getpostman.com/view/13515563/2sA3JJ9i7a)  or https://documenter.getpostman.com/view/13515563/2sA3JJ9i7a
+
+
+#### Requirements:
+    PHP ^8.1
+    Laravel Framework ^10.10
+    Guzzle HTTP ^7.2
+    Laravel Sanctum ^3.3
+    Laravel Tinker ^2.8
+    JWT Auth (php-open-source-saver/jwt-auth) ^2.2
+    Spatie Laravel Query Builder ^5.7
+#### Development Dependencies:
+    Barryvdh Laravel IDE Helper ^3.0
+    Faker PHP ^1.9.1
+    Laravel Pint ^1.0
+    Laravel Sail ^1.18
+    Mockery ^1.4.4
+    Nunomaduro Collision ^7.0
+    PHPUnit ^10.5
+    Spatie Laravel Ignition ^2.0
+
+
+#### Contributors:
+- **Arif Khan** - [GitHub Profile](https://github.com/arifkhan1990) , [LinkedIn Profile](ttps://www.linkedin.com/in/arifkhan1990/)
+
+ 

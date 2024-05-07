@@ -135,6 +135,6 @@ Document API endpoints, request/response formats, and authentication mechanisms 
 
 
 #### Contributors:
-    # Arif Khan
-        [GitHub Profile] (https://github.com/arifkhan1990)
-        [LinkedIn Profile] (https://www.linkedin.com/in/arifkhan1990/)
+- **Arif Khan** - [GitHub Profile](https://github.com/arifkhan1990) , [LinkedIn Profile](ttps://www.linkedin.com/in/arifkhan1990/)
+
+ 
