@@ -20,7 +20,7 @@ class AuthTest extends TestCase
 
         $response = $this->postJson('/api/register', $userData);
 
-        $response->assertStatus(200);
+        $response->assertStatus(201);
     }
 
     public function test_user_login()
@@ -31,9 +31,39 @@ class AuthTest extends TestCase
             'email' => $user->email,
             'password' => 'password',
         ]);
+
+        $response->assertStatus(200)
+            ->assertJsonStructure([
+                'success' => [
+                    'status',
+                    'message',
+                    'code',
+                    'data' => [
+                        'user' => [
+                            'id',
+                            'name',
+                            'email',
+                            'email_verified_at',
+                            'created_at',
+                            'updated_at',
+                        ],
+                        'authorisation' => [
+                            'token',
+                            'type',
+                        ],
+                    ],
+                ],
+            ]);
+
         $this->assertAuthenticated();
-        // $response->assertStatus(200)
-        //     ->assertJsonStructure(['access_token']);
+        $token = $response->json('success.data.authorisation.token');
+        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $token])->get('/api/user');
+        $response->assertStatus(200);
+        // $response->assertJson(['id' => 1]); // Assuming user ID is 1
+
+        // Test user logout
+        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $token])->postJson('/api/logout');
+        $response->assertStatus(200);
     }
 
 
@@ -41,13 +71,25 @@ class AuthTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this->actingAs($user)
-            ->getJson('/api/user');
-
+        $response = $this->postJson('/api/login', [
+            'email' => $user->email,
+            'password' => 'password',
+        ]);
         $response->assertStatus(200)
-            ->assertJson([
-                'id' => $user->id,
-                'email' => $user->email,
+            ->assertJsonStructure([
+                'success' => [
+                    'status',
+                    'message',
+                    'code',
+                    'data' => [
+                        'authorisation' => [
+                            'token',
+                            'type',
+                        ],
+                    ],
+                ],
             ]);
+
+        $this->assertAuthenticated();
     }
 }

@@ -33,7 +33,7 @@ class TaskControllerTest extends TestCase
         $this->post(route('tasks.store'), [
             "title" => "Interview for AI/ML",
             "description" => "Interview for AI/ML position",
-            "due_date" => "2024-05-08",
+            "due_date" => "2024-05-09",
             "category" => "AI/ML"
         ]);
         $this->assertEquals(1, Task::count());
@@ -53,10 +53,19 @@ class TaskControllerTest extends TestCase
         $this->post(route('tasks.store'), [
             "title" => "Interview for AI/ML",
             "description" => "Interview for AI/ML position",
-            "due_date" => "2024-05-08",
+            "due_date" => "2024-05-09",
             "category" => "AI/ML"
         ]);
         $this->assertEquals(1, Task::count());
+        $task = $this->get(route('tasks.index'));
+
+        $task->assertStatus(200)
+            ->assertJsonStructure([
+                'status',
+                'message',
+                'code',
+                'data',
+            ]);
     }
 
     public function test_a_logged_user_update_task()
@@ -71,7 +80,7 @@ class TaskControllerTest extends TestCase
         $data = $this->post(route('tasks.store'), [
             "title" => "Interview for AI/ML",
             "description" => "Interview for AI/ML position",
-            "due_date" => "2024-05-08",
+            "due_date" => "2024-05-09",
             "category" => "AI/ML"
         ]);
 
@@ -98,13 +107,13 @@ class TaskControllerTest extends TestCase
         $data = $this->post(route('tasks.store'), [
             "title" => "Interview for AI/ML",
             "description" => "Interview for AI/ML position",
-            "due_date" => "2024-05-08",
+            "due_date" => "2024-05-09",
             "category" => "AI/ML"
         ]);
 
         $task = Task::first();
 
-        $data = $this->delete(route('tasks.destroy', $task->id));
+        $data = $this->delete(route('tasks.destroy', $task));
         $update_task = Task::first();
 
         $this->assertEquals(0, Task::count());

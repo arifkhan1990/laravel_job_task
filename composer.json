@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
+    "name": "Task Management API ",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "Task Management API  application.",
     "keywords": ["laravel", "framework"],
     "license": "MIT",
     "require": {

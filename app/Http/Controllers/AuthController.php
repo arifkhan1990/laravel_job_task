@@ -70,11 +70,7 @@ class AuthController extends Controller
             'message' => 'User created successfully',
             'code' => 201,
             'data' => [
-                'user' => $user,
-                'authorisation' => [
-                    'token' => $token,
-                    'type' => 'bearer',
-                ]
+                'user' => $user
             ]
         ]))->response()->setStatusCode(201);
     }
