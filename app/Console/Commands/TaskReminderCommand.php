@@ -11,7 +11,7 @@ use Carbon\Carbon;
 
 class TaskReminderCommand extends Command
 {
-    protected $signature = 'reminder:daily';
+    protected $signature = 'reminders:send';
 
     protected $description = 'Task Pending reminder emails to this the tasks deadline!';
 
@@ -23,7 +23,7 @@ class TaskReminderCommand extends Command
 
         foreach ($tasks as $task) {
             // Send reminder email to the user who created the task
-            Mail::to($task->creator->email)->send(new TaskReminderMail($task));
+            // Mail::to($task->creator->email)->send(new TaskReminderMail($task));
         }
 
         $this->info('Reminder emails sent for tasks due today.');

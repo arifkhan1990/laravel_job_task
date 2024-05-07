@@ -21,7 +21,7 @@ class TaskFactory extends Factory
             'title' => $this->faker->sentence(),
             'description' => $this->faker->paragraph(),
             'category' => $this->faker->word(),
-            'due_date' => $this->faker->date(),
+            'due_date' => $this->faker->dateTimeBetween('now', '+30 days')->format('Y-m-d'),
             'is_done' => false,
             'created_by' => User::factory(),
         ];

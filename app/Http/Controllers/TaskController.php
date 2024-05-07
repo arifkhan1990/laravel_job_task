@@ -28,7 +28,13 @@ class TaskController extends Controller
 
     public function show(Request $request, Task $task)
     {
-        return new TaskResource($task);
+        if (Auth::id() == $task->created_by) {
+            return new TaskResource($task);
+        } else {
+            return response()->json([
+                'message' => 'Unauthorized'
+            ], 401);
+        }
     }
 
     public function store(StoreTaskRequest $request)

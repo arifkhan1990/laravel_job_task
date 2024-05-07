@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Resources\ErrorResource;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -16,9 +17,12 @@ class UserController extends Controller
     {
         $validated = $request->validated();
         if (Auth::id() != $id) {
-            return response()->json([
-                'message' => 'You are not authorized to update this user'
-            ], 403);
+            return (new ErrorResource([
+                'status' => 'Error',
+                'message' => 'You are not authorized to update this user',
+                'code' => 403,
+                'errors' => null
+            ]))->response()->setStatusCode(403);
         } else {
             $userData = User::where('id', $id)->first();
             $userData->update($validated);

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
+use App\Http\Resources\SuccessResource;
 use App\Mail\TaskReminderMail;
 use App\Mail\TestEmail;
 use App\Models\Task;
@@ -30,7 +31,14 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+    return (new SuccessResource([
+        'status' => 'Success',
+        'message' => 'User Profiole Information',
+        'code' => 200,
+        'data' => [
+            'user' => $request->user(),
+        ]
+    ]))->response()->setStatusCode(200);
 });
 
 Route::middleware(['auth:api', 'throttle:10,1'])->group(function () {

@@ -23,7 +23,7 @@ class StoreTaskRequest extends FormRequest
     {
         return [
             'title' => 'required|max:255',
-            'due_date' => 'required|date_format:Y-m-d|after:10 hours',
+            'due_date' => 'required|date_format:Y-m-d|after: 1 days',
             'description' => 'nullable|string',
             'category' => 'nullable|string',
             'created_by' => 'exists:users,id'
