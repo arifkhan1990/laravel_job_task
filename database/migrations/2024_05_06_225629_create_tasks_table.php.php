@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('category')->default('');
             $table->date('due_date');
             $table->boolean('is_done')->default(false);
+            $table->foreignId('created_by')->constrained('users');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tasks');
+        //
     }
 };

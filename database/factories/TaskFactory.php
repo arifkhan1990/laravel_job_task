@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -22,6 +23,7 @@ class TaskFactory extends Factory
             'category' => $this->faker->word(),
             'due_date' => $this->faker->date(),
             'is_done' => false,
+            'created_by' => User::factory(),
         ];
     }
 }
